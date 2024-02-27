@@ -34,14 +34,20 @@
  *                         Data Types Declaration                              *
  *******************************************************************************/
 
-typedef uint16_t        PduIdType;
-typedef uint16_t        PduLengthType;
+typedef uint16_t       PduIdType;
+typedef uint32_t       PduLengthType;
+typedef uint8_t        PduPayloadType;
 
 /* Global PDU */
 typedef struct
 {
-    uint32_t           PduLength;
+	PduLengthType      PduLength;
 }Pdu_Type;
+
+typedef struct
+{
+
+}PduR_RoutingPathGroupType;
 
 /* PDU Source */
 typedef struct
@@ -79,9 +85,23 @@ typedef enum
 	BUFREQ_E_OVFL
 }BufReq_ReturnType;
 
+typedef enum
+{
+	PDUR_CAN_IF,
+	PDUR_CAN_TP,
+	PDUR_CAN_NM,
+	PDUR_LIN_IF,
+	PDUR_LIN_TP,
+	PDUR_LIN_NM,
+	PDUR_FR_IF,
+	PDUR_FR_TP,
+	PDUR_FR_NM,
+
+}PduR_ModuleType;
+
 typedef struct
 {
-    uint8_t            *SduDataPtr;			/* payload */
+	PduPayloadType      *SduDataPtr;	    /* payload */
     PduLengthType       SduLength;	        /* length of SDU */
 } PduInfoType;
 
