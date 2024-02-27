@@ -20,6 +20,7 @@
 
 #define PDUR_VENDOR_ID                            10u
 #define PDUR_MODULE_ID                            120u
+#define PDUR_INSTANCE_ID	                      0u
 
 /* Module Version 1.0.0 */
 #define PDUR_SW_MAJOR_VERSION                     1u
@@ -78,22 +79,32 @@ typedef enum
     PDUR_ONLINE      /* PDU Router initialized successfully. */
 } PduR_StateType;
 
+typedef struct
+{
+    uint32_t    BufSize;
+    uint8_t    *DataPtr;
+}PduRTxBuffer_type;
+
 /* PDUR Configuration */
 typedef struct
 {
-  PduR_PBConfigIdType    PduRConfigurationId;
+	PduR_RoutingPathGroupIdType PduRRoutingPathGroup;
+    PduR_PBConfigIdType         PduRConfigurationId;
 
-  /* Maximum number of routing paths in all tables */
-  const uint16_t         PduRMaxRoutingPathCnt;
+    /* Maximum number of routing paths in all tables */
+    const uint16_t              PduRMaxRoutingPathCnt;
 
-  /* Array of pointers to the routing paths and routing table */
-  PduRRoutingPath_type **RoutingPaths;
+    PduR_RoutingPathGroupIdType PduRMaxRoutingPathGroupCnt;
+    PduRTxBuffer_type           PduRTxBuffer;
+    /* Array of pointers to the routing paths and routing table */
+    PduRRoutingPath_type      **RoutingPaths;
 }PduR_PBConfigType;
 
 /*******************************************************************************
  *                            External Variables                               *
  *******************************************************************************/
 extern const PduR_PBConfigType    *PduRConfig;
+extern PduR_StateType              PduRState;
 
 /*******************************************************************************
  *                           Functions Declaration                             *
