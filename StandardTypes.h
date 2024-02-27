@@ -39,6 +39,7 @@
 #define E_OK                            0u
 #define E_NOT_OK                        1u
 #define ZERO_INIT                       0u
+#define NULL_PTR                        ((void *)0)
 
 /*******************************************************************************
  *                         Data Types Declaration                              *
@@ -46,9 +47,6 @@
 
 typedef uint8_t             Std_ReturnType;
 typedef uint8_t      		boolean;
-#ifndef NULL
-#define NULL                ((void *)0)
-#endif
 
 typedef struct
 {
