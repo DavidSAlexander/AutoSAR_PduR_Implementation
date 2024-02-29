@@ -51,7 +51,7 @@ PduR_PBConfigIdType PduR_GetConfigurationId (void)
 #endif
         return 0;
     }
-    return PduRConfig->PduRRoutingPaths.PduRConfigurationId;
+    return PduRConfig->PduR.PduRRoutingPaths.PduRConfigurationId;
 }
 
 void PduR_EnableRouting (PduR_RoutingPathGroupIdType id)
@@ -65,7 +65,7 @@ void PduR_EnableRouting (PduR_RoutingPathGroupIdType id)
     }
     else
 	{
-    	if(id < PduRConfig->PduRRoutingPaths.PduRMaxRoutingPathCnt)
+    	if(id < PduRConfig->PduR.PduRRoutingPaths.PduRMaxRoutingPathCnt)
     	{
 
     	}
@@ -86,8 +86,8 @@ void PduR_GetVersionInfo (Std_VersionInfoType* versionInfo)
 	}
 	else
 	{
-	    versionInfo->ModuleID         = PDUR_MODULE_ID;
-	    versionInfo->VendorID         = PDUR_VENDOR_ID;
+		versionInfo->ModuleID         = PDUR_MODULE_ID;
+		versionInfo->VendorID         = PDUR_VENDOR_ID;
 	    versionInfo->SW_Major_Version = PDUR_SW_MAJOR_VERSION;
 	    versionInfo->SW_Minor_Version = PDUR_SW_MINOR_VERSION;
 	    versionInfo->SW_Patch_Version = PDUR_SW_PATCH_VERSION;
