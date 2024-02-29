@@ -38,6 +38,8 @@
 #define STD_OFF                         0u
 #define E_OK                            0u
 #define E_NOT_OK                        1u
+#define FALSE                           0u
+#define TRUE                            1u
 #define ZERO_INIT                       0u
 #define NULL_PTR                        ((void *)0)
 
