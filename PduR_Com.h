@@ -30,9 +30,9 @@
  *                            Functions Declaration                            *
  *******************************************************************************/
 
-Std_ReturnType    PduR_ComTransmit (PduIdType TxPduId, const PduInfoType* PduInfoPtr);
-Std_ReturnType    PduR_ComCancelTransmit (PduIdType TxPduId);
-Std_ReturnType    PduR_ComCancelReceive (PduIdType RxPduId);
-void              PduR_ComRxIndication (PduIdType RxPduId, const PduInfoType* PduInfoPtr);
+Std_ReturnType  PduR_ComTransmit (PduIdType TxPduId, const PduInfoType* PduInfoPtr);
+Std_ReturnType  PduR_ComCancelTransmit (PduIdType TxPduId);
+Std_ReturnType  PduR_ComCancelReceive (PduIdType RxPduId);
+void            PduR_ComRxIndication (PduIdType RxPduId, const PduInfoType* PduInfoPtr);
 
 #endif /* PDUR_PBCFG_H_PDUR_COM_H_ */

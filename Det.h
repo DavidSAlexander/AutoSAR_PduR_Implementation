@@ -20,7 +20,14 @@
 #define DET_VENDOR_ID                       10u
 
 #define DET_MODULE_ID                       17u
+#define DET_INSTANCE_ID                     15u
 
+
+/* Development Errors Ids */
+#define DET_E_PARAM_POINTER                 (uint8_t)(0x09)
+
+/* Service IDs */
+#define DET_GET_VERSION_INFO_SID            (uint8_t)(0xF1)
 
 #define DET_SW_MAJOR_VERSION                1u
 #define DET_SW_MINOR_VERSION                0u

@@ -1,6 +1,6 @@
 
 /*******************************************************************************
- *  [FILE NAME]   :      <PduR_CanCanNm.h>                                     *
+ *  [FILE NAME]   :      <PduR_CanNm.h>                                        *
  *  [AUTHOR]      :      <David S. Alexander>                                  *
  *  [DATE CREATED]:      <27 Feb 2024>                                         *
  *  [Description] :      < >                                                   *

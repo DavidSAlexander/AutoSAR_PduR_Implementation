@@ -71,9 +71,8 @@ typedef enum
 
 typedef struct
 {
-	PduIdType           PduId;
 	PduPayloadType     *SduDataPtr;	        /* payload */
-        PduLengthType       SduLength;	        /* length of SDU */
+    PduLengthType       SduLength;	        /* length of SDU */
 } PduInfoType;
 
 typedef struct
