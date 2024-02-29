@@ -21,7 +21,7 @@
 
 #define PDUR_VENDOR_ID                            10u
 #define PDUR_MODULE_ID                            120u
-#define PDUR_INSTANCE_ID	                      0u
+#define PDUR_INSTANCE_ID	                  0u
 
 /* Module Version 1.0.0 */
 #define PDUR_SW_MAJOR_VERSION                     1u
