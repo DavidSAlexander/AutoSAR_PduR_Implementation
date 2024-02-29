@@ -59,10 +59,10 @@ Std_ReturnType PduR_ComTransmit(PduIdType TxPduId, const PduInfoType* PduInfoPtr
     else
     {
         /* Iterate through each routing path to find the matching TxPduId */
-        for (uint8_t PathsCounter = 0; PathsCounter < PBPduRConfig.PduRRoutingPaths.PduRMaxRoutingPathCnt; PathsCounter++)
+        for (uint8_t PathsCounter = 0; PathsCounter < PBPduRConfig.PduR.PduRRoutingPaths.PduRMaxRoutingPathCnt; PathsCounter++)
         {
             /* Get the current routing path */
-            const PduRRoutingPath_type* RoutingPath = &PBPduRConfig.PduRRoutingPaths.PduRRoutingPath[PathsCounter];
+            const PduRRoutingPath_type* RoutingPath = &PBPduRConfig.PduR.PduRRoutingPaths.PduRRoutingPath[PathsCounter];
 
             /* Check if the current routing path matches the TxPduId */
             if (RoutingPath->PduRSrcPduRef->PduRSourcePduHandleId == TxPduId)
@@ -103,20 +103,23 @@ Std_ReturnType PduR_ComTransmit(PduIdType TxPduId, const PduInfoType* PduInfoPtr
                      	       ret = LinIf_TriggerTransmit(RoutingPath->PduRDestPduRRef->PduRDestPduHandleId, PduInfoPtr);
                      	       break;
                           case PDUR_FR_IF:
-                               ret = FrIf_TriggerTransmit(RoutingPath->PduRDestPduRRef->PduRDestPduHandleId, PduInfoPtr);
-                               break;
+                        	   ret = FrIf_TriggerTransmit(RoutingPath->PduRDestPduRRef->PduRDestPduHandleId, PduInfoPtr);
+                        	   break;
                           case PDUR_FR_NM:
-                               ret = LinIf_TriggerTransmit(RoutingPath->PduRDestPduRRef->PduRDestPduHandleId, PduInfoPtr);
-                               break;
+                        	   ret = LinIf_TriggerTransmit(RoutingPath->PduRDestPduRRef->PduRDestPduHandleId, PduInfoPtr);
+                        	   break;
                           default:
-                               break;
+                        		break;
                      	}     */
+                    /* Update return value to indicate success */
+                    ret = E_OK;
                 }
                 else
                 {
                     /* Unsupported data provision type, break the loop */
                     break;
                 }
+
                 /* Break the loop after processing the matching routing path */
                 break;
             }

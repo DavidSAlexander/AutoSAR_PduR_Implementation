@@ -76,7 +76,7 @@ PduRRoutingPath_type PDURRoutingPath[] =
 
 const PduR_PBConfigType PBPduRConfig =
 {
-	.PduRRoutingPaths.PduRConfigurationId   = 0,
-	.PduRRoutingPaths.PduRMaxRoutingPathCnt = sizeof(PDURRoutingPath)/sizeof(PDURRoutingPath[0]),
-	.PduRRoutingPaths.PduRRoutingPath       = PDURRoutingPath,
+	.PduR.PduRRoutingPaths.PduRConfigurationId   = 0,
+	.PduR.PduRRoutingPaths.PduRMaxRoutingPathCnt = sizeof(PDURRoutingPath)/sizeof(PDURRoutingPath[0]),
+	.PduR.PduRRoutingPaths.PduRRoutingPath       = PDURRoutingPath,
 };
