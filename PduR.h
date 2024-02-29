@@ -13,6 +13,7 @@
  *******************************************************************************/
 #include "Det.h"
 #include "ComStackTypes.h"
+#include "PduR_PBcfg.h"
 
 /*******************************************************************************
  *                             Macro Declarations                              *
@@ -70,8 +71,6 @@
 /*******************************************************************************
  *                          Data Types Declaration                             *
  *******************************************************************************/
-typedef uint16_t     PduR_PBConfigIdType;
-typedef uint16_t     PduR_RoutingPathGroupIdType;
 
 typedef enum
 {
@@ -79,32 +78,86 @@ typedef enum
     PDUR_ONLINE      /* PDU Router initialized successfully. */
 } PduR_StateType;
 
+typedef enum
+{
+	PDUR_DIRECT,
+	PDUR_TRIGGERTRANSMIT
+}PduRDestPduDataProvision_Type;
+
+typedef uint16_t     PduR_PBConfigIdType;
+typedef uint16_t     PduR_RoutingPathGroupIdType;
+
 typedef struct
 {
-    uint32_t    BufSize;
-    uint8_t    *DataPtr;
+	boolean                      PduRIsEnabledAtInit;
+	PduR_RoutingPathGroupIdType  PduRRoutingPathGroupId;
+
+}PduRRoutingPathGroup_type;
+
+/* PDU Source */
+typedef struct
+{
+  uint32_t             PduRSourcePduBlockSize;
+  const PduIdType      PduRSourcePduHandleId;
+  boolean              PduRSrcPduUpTxConf;
+  PduInfoType         *PduRSrcPduRef;
+}PduRSrcPdu_type;
+
+/* PDU Destination */
+typedef struct
+{
+  PduRDestPduDataProvision_Type PduRDestPduDataProvision;
+  const PduIdType               PduRDestPduHandleId;
+  boolean                       PduRTransmissionConfirmation;
+  PduInfoType                  *PduRDestPduRef;
+  PduR_ModuleType               PduR_Module;
+}PduRDestPdu_type;
+
+typedef struct
+{
+    uint32_t                    PduRPduMaxLength;
+    uint8_t                    *DataPtr;
 }PduRTxBuffer_type;
+
+/* PDU Routing Path */
+typedef struct
+{
+  uint8_t                       PduRQueueDepth;
+  uint16_t                      PduRTpThreshold;
+  PduRTxBuffer_type            *PduRDestTxBufferRef;
+  PduRRoutingPathGroup_type    *PduRRoutingPathGroupRef;
+  PduRDestPdu_type             *PduRDestPduRRef;
+  PduRSrcPdu_type              *PduRSrcPduRef;
+}PduRRoutingPath_type;
+
+typedef struct
+{
+  PduRRoutingPath_type          PduRRoutingPath;
+}PduRRoutingTable_type;
+
+typedef struct
+{
+	PduR_PBConfigIdType         PduRConfigurationId;
+	uint16_t                    PduRMaxRoutingPathCnt;
+	uint16_t                    PduRMaxRoutingPathGroupCnt;
+	PduRDestPdu_type           *PduRDestPdu;
+	PduRRoutingPath_type       *PduRRoutingPath;
+	PduRRoutingPathGroup_type  *PduRRoutingPathGroup;
+	PduRSrcPdu_type            *PduRSrcPdu;
+	PduRTxBuffer_type          *PduRTxBuffer;
+}PduRRoutingPaths_type;
 
 /* PDUR Configuration */
 typedef struct
 {
-	PduR_RoutingPathGroupIdType PduRRoutingPathGroup;
-    PduR_PBConfigIdType         PduRConfigurationId;
-
-    /* Maximum number of routing paths in all tables */
-    const uint16_t              PduRMaxRoutingPathCnt;
-
-    PduR_RoutingPathGroupIdType PduRMaxRoutingPathGroupCnt;
-    PduRTxBuffer_type           PduRTxBuffer;
-    /* Array of pointers to the routing paths and routing table */
-    PduRRoutingPath_type      **RoutingPaths;
+    PduRRoutingPaths_type       PduRRoutingPaths;
 }PduR_PBConfigType;
 
 /*******************************************************************************
  *                            External Variables                               *
  *******************************************************************************/
-extern const PduR_PBConfigType    *PduRConfig;
 extern PduR_StateType              PduRState;
+extern const PduR_PBConfigType     PBPduRConfig;
 
 /*******************************************************************************
  *                           Functions Declaration                             *
