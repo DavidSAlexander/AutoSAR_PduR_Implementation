@@ -38,38 +38,6 @@ typedef uint16_t       PduIdType;
 typedef uint32_t       PduLengthType;
 typedef uint8_t        PduPayloadType;
 
-/* Global PDU */
-typedef struct
-{
-	PduLengthType      PduLength;
-}Pdu_Type;
-
-typedef struct
-{
-
-}PduR_RoutingPathGroupType;
-
-/* PDU Source */
-typedef struct
-{
-  const PduIdType      SourcePduHandleId;
-  Pdu_Type            *SrcPduRef;
-}PduRSrcPdu_type;
-
-/* PDU Destination */
-typedef struct
-{
-  const PduIdType      DestPduHandleId;
-  Pdu_Type            *DestPduRef;
-}PduRDestPdu_type;
-
-/* PDU Routing Path */
-typedef struct
-{
-  PduRSrcPdu_type     *PduRSrcPduRef;
-  PduRDestPdu_type    *PduRDestPduRef;
-}PduRRoutingPath_type;
-
 typedef enum
 {
 	TP_DATACONF,
@@ -87,6 +55,8 @@ typedef enum
 
 typedef enum
 {
+	PDUR_DCM,
+	PDUR_COM,
 	PDUR_CAN_IF,
 	PDUR_CAN_TP,
 	PDUR_CAN_NM,
@@ -101,8 +71,9 @@ typedef enum
 
 typedef struct
 {
-	PduPayloadType      *SduDataPtr;	    /* payload */
-    PduLengthType       SduLength;	        /* length of SDU */
+	PduIdType           PduId;
+	PduPayloadType     *SduDataPtr;	        /* payload */
+        PduLengthType       SduLength;	        /* length of SDU */
 } PduInfoType;
 
 typedef struct
